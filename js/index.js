@@ -1,4 +1,5 @@
-var baseURI = 'https://github.com/mcslof/peoplespavers/master/data/';
+//var baseURI = 'https://github.com/mcslof/peoplespavers/master/data/';
+var baseURI = 'https://raw.githubusercontent.com/mcslof/peoplespavers/master/data/';
 // var baseURI = 'http://localhost:63342/peoplespavers/data/';
 
 var application = new Vue({
@@ -20,13 +21,13 @@ function emptyTile() {
     };
 }
 
-
-$.get(baseURI + "tiles.json")
-    .done(function (data) {
+$.ajax({
+    url: baseURI + "tiles.json", success: function (data) {
         application.error = "";
         try {
             data = JSON.parse(data);
-        } catch (_) {}
+        } catch (_) {
+        }
         console.log(data);
         data = data.map(function (tile) {
             tile.image = baseURI + "images/" + tile.image;
@@ -46,12 +47,13 @@ $.get(baseURI + "tiles.json")
             }
         });
         application.tiles = tiles;
-    })
-    .fail(function (xhr, status, error) {
+    }, error: function (xhr, status, error) {
         if (xhr.responseJSON && xhr.responseJSON.message && xhr.responseJSON.message !== application.error) {
             application.error = xhr.responseJSON.message;
         }
         console.log(xhr);
         console.log(status);
         console.log(error);
-    });
+    },
+    cache: false
+});
