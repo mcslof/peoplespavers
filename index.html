@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PeoplesPavers</title>
+    <meta name="LLTNF" content="Long live the new flesh: Afstudeer pagina voor Kunst academie">
+    <link rel="icon" href="/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/Array.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div id="header">Peoples Pavers</div>
+<div id="application">
+    <div v-for="t in tiles" v-bind:key="t.id" v-bind:class="t.class">
+        <img class="tile-image" v-bind:src="t.image" />
+    </div>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>
